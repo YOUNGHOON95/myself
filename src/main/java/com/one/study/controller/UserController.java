@@ -12,12 +12,13 @@ import com.one.study.user.UserService;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("api/user")
 public class UserController {
     
     @Autowired
     private UserService userService;
     
-    @PostMapping("/register")
+    @PostMapping("/")
     @Operation(summary = "회원 등록" , description = "회원 등록 메서드")
     public Members creatMember(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
