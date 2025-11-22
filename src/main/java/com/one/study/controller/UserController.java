@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.one.study.user.UserService;
@@ -12,13 +13,13 @@ import com.one.study.user.UserService;
 import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("api/user")
 public class UserController {
+
+    private final UserService userService;
     
-    @Autowired
-    private UserService userService;
-    
-    @PostMapping("/")
+    @PostMapping()
     @Operation(summary = "회원 등록" , description = "회원 등록 메서드")
     public Members creatMember(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
