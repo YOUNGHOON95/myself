@@ -1,11 +1,12 @@
-package com.one.study.dto;
+package com.one.study.user;
 
-import com.one.study.user.domain.Member;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 @Getter
-public class MemberDto {
+public class InsertMemberDto {
     private Long id;
     private String name;
     private String password;
@@ -14,7 +15,7 @@ public class MemberDto {
     private String contact;
 
     @Builder
-    public MemberDto(Long id, String name, String password, String title, String email, String contact ) {
+    public InsertMemberDto(Long id, String name, String password, String title, String email, String contact ) {
         this.id = id;
         this.name = name;
         this.password = password;

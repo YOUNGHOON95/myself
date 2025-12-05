@@ -1,6 +1,6 @@
 package com.one.study.user.domain;
 
-import com.one.study.dto.MemberDto;
+import com.one.study.user.InsertMemberDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,8 +38,8 @@ public class Member {
 
 
     //2번째
-    public MemberDto toDto() {
-        return new MemberDto(
+    public InsertMemberDto toDto() {
+        return new InsertMemberDto(
                 this.getId(),
                 this.getName(),
                 this.getPassword(),
@@ -50,14 +50,14 @@ public class Member {
     }
 
 
-    public static Member fromDto(MemberDto memberDto){
+    public static Member fromDto(InsertMemberDto insertMemberDto){
         return new Member(
-                memberDto.getId(),
-                memberDto.getName(),
-                memberDto.getPassword(),
-                memberDto.getTitle(),
-                memberDto.getEmail(),
-                memberDto.getContact()
+                insertMemberDto.getId(),
+                insertMemberDto.getName(),
+                insertMemberDto.getPassword(),
+                insertMemberDto.getTitle(),
+                insertMemberDto.getEmail(),
+                insertMemberDto.getContact()
         );
     }
 

@@ -1,6 +1,5 @@
-package com.one.study.dto;
+package com.one.study.user;
 
-import com.one.study.user.domain.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

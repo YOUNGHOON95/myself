@@ -1,4 +1,4 @@
-package com.one.study.dto;
+package com.one.study.user;
 
 import lombok.Builder;
 import lombok.Getter;

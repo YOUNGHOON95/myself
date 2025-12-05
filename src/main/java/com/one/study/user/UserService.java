@@ -1,15 +1,9 @@
 package com.one.study.user;
 
-import com.one.study.dto.DeleteMemberDto;
-import com.one.study.dto.MemberDto;
-import com.one.study.dto.UpdateMemberDto;
 import com.one.study.user.domain.Member;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.one.study.user.domain.UserRepository;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,28 +12,28 @@ public class UserService {
     private final UserRepository userRepository;
 
     //INSERT
-    public MemberDto saveMember(MemberDto memberdto) {
-        Member member = Member.fromDto(memberdto);
+    public InsertMemberDto saveMember(InsertMemberDto insertmemberdto) {
+        Member member = Member.fromDto(insertmemberdto);
         Member savedMember = userRepository.save(member);
         return savedMember.toDto();
     }
 
     //SELET
-    public MemberDto getMember(Long id){
+    public InsertMemberDto getMember(Long id){
         Member member = userRepository.findById(id).orElseThrow();
 
         return member.toDto();
     }
 
     //UPDATE
-    public Member updateMember(Long id, UpdateMemberDto updatememberdto) {
-        Member updateMemberDto = userRepository.findById(id).orElseThrow();
+    public InsertMemberDto updateMember(Long id, UpdateMemberDto updatememberdto) {
+        Member member = userRepository.findById(id).orElseThrow();
 
-        updatememberdto.setName(updatememberdto.getName());
-        updateMemberDto.setTitle(updateMemberDto.getTitle());
-        updatememberdto.setContact(updateMemberDto.getContact());
+        member.setName(updatememberdto.getName());
+        member.setTitle(updatememberdto.getTitle());
+        member.setContact(updatememberdto.getContact());
         
-        return userRepository.save(updateMemberDto);
+        return userRepository.save(member).toDto();
     }
 
     //DELETE
