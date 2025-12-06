@@ -1,5 +1,6 @@
 package com.one.study.controller;
 
+import com.one.study.user.MemberDto;
 import com.one.study.user.UpdateMemberDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -21,6 +22,10 @@ public class UpdateData {
         @Schema(description = "내용", example = "내용 테스트")
         private String contact;
 
+        public updateRequest(){
+
+        }
+
         @Builder
         public updateRequest(String name, String title, String contact){
             this.name = name;
@@ -40,11 +45,11 @@ public class UpdateData {
 
     @Getter
     public static class Response {
-        @Schema(description = "이름")
+        @Schema(description = "이름" , example = "홍길동")
         private String name;
-        @Schema(description = "제목")
+        @Schema(description = "제목", example = "제목입니다")
         private String title;
-        @Schema(description = "내용")
+        @Schema(description = "내용", example = "내용입니다")
         private String contact;
 
         @Builder
@@ -54,11 +59,11 @@ public class UpdateData {
             this.contact = contact;
         }
 
-        public UpdateMemberDto fromParam() {
-            return  UpdateMemberDto.builder()
-                    .name(name)
-                    .title(title)
-                    .contact(contact)
+        public static Response from(MemberDto memberdto) {
+            return  Response.builder()
+                    .name(memberdto.getName())
+                    .title(memberdto.getTitle())
+                    .contact(memberdto.getContact())
                     .build();
         }
 

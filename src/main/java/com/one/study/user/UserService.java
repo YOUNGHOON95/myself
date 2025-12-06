@@ -12,21 +12,21 @@ public class UserService {
     private final UserRepository userRepository;
 
     //INSERT
-    public InsertMemberDto saveMember(InsertMemberDto insertmemberdto) {
+    public MemberDto saveMember(MemberDto insertmemberdto) {
         Member member = Member.fromDto(insertmemberdto);
         Member savedMember = userRepository.save(member);
         return savedMember.toDto();
     }
 
     //SELET
-    public InsertMemberDto getMember(Long id){
+    public MemberDto getMember(Long id){
         Member member = userRepository.findById(id).orElseThrow();
 
         return member.toDto();
     }
 
     //UPDATE
-    public InsertMemberDto updateMember(Long id, UpdateMemberDto updatememberdto) {
+    public MemberDto updateMember(Long id, UpdateMemberDto updatememberdto) {
         Member member = userRepository.findById(id).orElseThrow();
 
         member.setName(updatememberdto.getName());

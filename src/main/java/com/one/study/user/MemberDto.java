@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class InsertMemberDto {
+public class MemberDto {
     private Long id;
     private String name;
     private String password;
@@ -15,7 +15,7 @@ public class InsertMemberDto {
     private String contact;
 
     @Builder
-    public InsertMemberDto(Long id, String name, String password, String title, String email, String contact ) {
+    public MemberDto(Long id, String name, String password, String title, String email, String contact ) {
         this.id = id;
         this.name = name;
         this.password = password;
