@@ -1,5 +1,7 @@
 package com.one.study.user;
 
+import com.one.study.error.CommonException;
+import com.one.study.error.ErrorCode;
 import com.one.study.user.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,21 +13,22 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    //INSERT
+    // INSERT
     public MemberDto saveMember(MemberDto insertmemberdto) {
+
         Member member = Member.fromDto(insertmemberdto);
         Member savedMember = userRepository.save(member);
         return savedMember.toDto();
     }
 
-    //SELET
+    // SELECT
     public MemberDto getMember(Long id){
-        Member member = userRepository.findById(id).orElseThrow();
+        Member member = userRepository.findById(id).orElseThrow(() -> new CommonException(ErrorCode.USER_NOT_FOUND));
 
         return member.toDto();
     }
 
-    //UPDATE
+    // UPDATE
     public MemberDto updateMember(Long id, UpdateMemberDto updatememberdto) {
         Member member = userRepository.findById(id).orElseThrow();
 

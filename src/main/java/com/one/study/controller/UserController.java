@@ -3,6 +3,11 @@ package com.one.study.controller;
 import com.one.study.user.MemberDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import com.one.study.user.UserService;
@@ -18,7 +23,17 @@ public class UserController {
     //INSERT
     @PostMapping()
     @Operation(summary = "회원 등록" , description = "회원 등록 메서드")
-    public InsertData.insertResponse creatMember(@RequestBody InsertData.insertRequest insert){
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "로그인 성공",
+                    content = @Content(schema = @Schema(implementation = InsertData.insertResponse.class))
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "서버 내부 오류")
+    })
+    public InsertData.insertResponse creatMember(@RequestBody @Valid InsertData.insertRequest insert){
         var bb = userService.saveMember(insert.toParam());
 
         return InsertData.insertResponse.from(bb);

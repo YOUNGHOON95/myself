@@ -18,14 +18,14 @@ public class InsertData {
         private String name;
 
         @Schema(description = "패스워드", example = "패스워드 테스트")
-        //@Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*()-+=]).{8,}$")
+        @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*()-+=]).{8,}$")
         private String password;
 
         @Schema(description = "제목", example = "제목 테스트")
         private String title;
 
         @Schema(description = "이메일", example = "이메일 테스트")
-        //@Email
+        @Email
         private String email;
 
         @Schema(description = "내용", example = "내용 테스트")
