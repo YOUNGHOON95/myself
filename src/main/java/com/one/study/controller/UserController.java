@@ -37,7 +37,6 @@ public class UserController {
         var bb = userService.saveMember(insert.toParam());
 
         return InsertData.insertResponse.from(bb);
-        //return userService.saveMember(insert.toParam());
     }
 
     //SELECT 전체
@@ -56,9 +55,6 @@ public class UserController {
     @Parameter(name = "id" , required = true , description = "아이디")
     public UpdateData.Response updateMember(@PathVariable("id") Long id, @RequestBody UpdateData.updateRequest request) {
         var aa = userService.updateMember(id,request.toParam());
-        //MemberDto aa = userService.updateMember(id,request.toParam());
-
-        //return UpdateData.Response.from(userService.updateMember(id,request.toParam()));
         return UpdateData.Response.from(aa);
 
     }

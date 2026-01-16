@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Hidden;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -15,7 +16,11 @@ import java.util.Map;
 @Slf4j
 public class GlobalExceptionHandler {
 
-
+    //@Valid 예외처리 @Pattern...
+    @ExceptionHandler({MethodArgumentNotValidException.class})
+    protected ResponseEntity handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+        return new ResponseEntity<>(e.getBindingResult().getFieldErrors().get(0).getDefaultMessage() ,HttpStatus.BAD_REQUEST);
+    }
 
     //400:사용자 입력 잘못 , 404:데이터X
     @ExceptionHandler(CommonException.class)

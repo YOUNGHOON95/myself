@@ -44,13 +44,5 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-//    public Member createMember(Member member){
-//        return userRepository.save(member);
-//    }
-
-//    public Optional<Member> findByid(Long id){
-//        return userRepository.findById(id);
-//    }
-
 
 }

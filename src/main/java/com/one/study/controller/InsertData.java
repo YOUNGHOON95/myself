@@ -14,18 +14,18 @@ public class InsertData {
     @Getter
     public static class insertRequest {
         @Schema(description = "이름", example = "홍길동")
-        @NotBlank
+        @NotBlank(message = "빈칸없이 입력해주세요")
         private String name;
 
         @Schema(description = "패스워드", example = "패스워드 테스트")
-        @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*()-+=]).{8,}$")
+        @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*()-+=]).{8,}$", message = "비밀번호는 8자 이상이어야 하며, 숫자/소문자/특수문자를 모두 포함해야 합니다")
         private String password;
 
         @Schema(description = "제목", example = "제목 테스트")
         private String title;
 
         @Schema(description = "이메일", example = "이메일 테스트")
-        @Email
+        @Email(message = "이메일 형식을 확인해주세요")
         private String email;
 
         @Schema(description = "내용", example = "내용 테스트")
