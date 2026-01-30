@@ -24,7 +24,7 @@ public class Member {
     private String contact;
 
 
-    //1번쨰
+    // 1번쨰
     @Builder
     public Member (Long id, String name, String password, String title, String email, String contact ) {
         this.id = id;
@@ -37,7 +37,7 @@ public class Member {
     }
 
 
-    //2번째
+    // 2번째
     public MemberDto toDto() {
         return new MemberDto(
                 this.getId(),

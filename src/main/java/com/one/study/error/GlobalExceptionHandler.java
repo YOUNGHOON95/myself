@@ -18,8 +18,13 @@ public class GlobalExceptionHandler {
 
     //@Valid 예외처리 @Pattern...
     @ExceptionHandler({MethodArgumentNotValidException.class})
-    protected ResponseEntity handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        return new ResponseEntity<>(e.getBindingResult().getFieldErrors().get(0).getDefaultMessage() ,HttpStatus.BAD_REQUEST);
+    protected ResponseEntity<Map<String,String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+        Map<String, String> error = new HashMap<>();
+        error.put("message" , e.getBindingResult().getFieldErrors().get(0).getDefaultMessage());
+        error.put("status" , String.valueOf(HttpStatus.BAD_REQUEST));
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(error);
     }
 
     //400:사용자 입력 잘못 , 404:데이터X

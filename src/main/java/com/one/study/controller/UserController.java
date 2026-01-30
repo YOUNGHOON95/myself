@@ -9,8 +9,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import com.one.study.user.UserService;
+
+import java.util.List;
 
 
 @RestController
@@ -20,7 +25,7 @@ public class UserController {
 
     private final UserService userService;
 
-    //INSERT
+    // INSERT
     @PostMapping()
     @Operation(summary = "회원 등록" , description = "회원 등록 메서드")
     @ApiResponses(value = {
@@ -39,17 +44,32 @@ public class UserController {
         return InsertData.insertResponse.from(bb);
     }
 
-    //SELECT 전체
-    
-    //SELECT 조건
-    @GetMapping("/select/{id}")
+    // SELECT 전체
+    @GetMapping("/select")
+    @Operation(summary = "회원 전체 조회" , description = "회원 전체 조회 메서드")
+    public Page<MemberDto> getMembers(
+            @PageableDefault(page = 0, size = 10, sort = "id")
+            Pageable pageable){
+        return userService.getMembers(pageable);
+    }
+
+    // SELECT 조건
+    @GetMapping("/select/id/{id}")
     @Operation(summary = "회원 조회" , description = "회원 조회 메서드")
     @Parameter(name = "id" , required = true , description = "아이디")
     public MemberDto getMember(@PathVariable("id") Long id){
         return userService.getMember(id);
     }
 
-    //UPDATE
+    // SELECT 이름
+    @GetMapping("/select/name/{name}")
+    @Operation(summary = "회원 이름 조회" , description = "회원 이름 조회 메서드")
+    @Parameter(name = "name" , required = true , description = "이름")
+    public List<MemberDto> getMemberName(@PathVariable("name") String name){
+        return userService.getMemberName(name);
+    }
+
+    // UPDATE
     @PutMapping("/update/{id}")
     @Operation(summary = "회원 수정" , description = "회원 수정 메서드")
     @Parameter(name = "id" , required = true , description = "아이디")
@@ -60,7 +80,7 @@ public class UserController {
     }
 
 
-    //DELETE
+    // DELETE
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "회원 삭제" , description = "회원 삭제 메서드")
     @Parameter(name = "id" , required = true , description = "아이디")
